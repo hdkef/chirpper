@@ -1,0 +1,32 @@
+#container {
+    position:absolute;
+    height:100%;
+    width:100%;
+    background-color: indigo;
+}
+
+#register-title{
+    margin-bottom: 15px;
+}
+
+#register-input mat-form-field{
+    display: block;
+}
+
+#card {
+    position:relative;
+    margin:0 auto;
+    margin-top:20vh;
+    width:200px;
+    padding:50px;
+}
+
+#button-group button{
+    display: block;
+}
+
+#button-group {
+    display: flex;
+    margin-top:15px;
+    justify-content: space-between;
+}

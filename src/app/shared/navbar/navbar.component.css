@@ -1,0 +1,33 @@
+#container {
+    background-color: white;
+}
+
+#logo {
+    text-align: center;
+}
+
+#center {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+}
+
+#logo-icon img{
+    display: block;
+    width: 24px;
+}
+
+#logo-icon {
+    display: flex;
+    align-content: center;
+}
+
+#title {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color:indigo;
+    padding-left:5px;
+    padding-right: 5px;
+    font-size:16px;
+}

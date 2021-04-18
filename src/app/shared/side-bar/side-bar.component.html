@@ -1,0 +1,50 @@
+<div id="container">
+    <div id="link-group">
+        <a routerLink='/feed'>
+            <div class="link-button">
+                <div class="center">
+                    <div>
+                        <img src="assets/home.svg">
+                    </div>
+                    <div class="title">
+                        Feed
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a routerLink='/profile'>
+            <div class="link-button">
+                <div class="center">
+                    <div>
+                        <img src="assets/profile.svg">
+                    </div>
+                    <div class="title">
+                        Profile
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a routerLink='/about'>
+            <div class="link-button">
+                <div class="center">
+                    <div>
+                        <img src="assets/about.svg">
+                    </div>
+                    <div class="title">
+                        About
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="link-button" (click)="logOut()" style="cursor: pointer;">
+            <div class="center">
+                <div>
+                    <img src="assets/logout.svg">
+                </div>
+                <div class="title">
+                    Logout
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
