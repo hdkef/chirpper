@@ -1,0 +1,19 @@
+#container {
+    background-color: whitesmoke;
+    height:100%;
+}
+
+#post {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+mat-form-field {
+    padding-top:15px;
+    width:100%;
+}
+
+#post-wrapper {
+    width:85%;
+}
