@@ -1,6 +1,6 @@
 a {
     text-decoration: none;
-    color:black;
+    color:indigo;
 }
 
 #container {
@@ -31,4 +31,8 @@ a {
 
 .link-button {
     padding:10px;
+}
+
+.link-button img{
+    width:24px;
 }

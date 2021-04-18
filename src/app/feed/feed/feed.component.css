@@ -1,5 +1,4 @@
 #container {
-    background-color: whitesmoke;
     height:100%;
 }
 
@@ -7,10 +6,13 @@
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
+    background-color: whitesmoke;
+    padding-bottom: 15px;
+    padding-top:15px;
 }
 
 mat-form-field {
-    padding-top:15px;
+    margin-top:15px;
     width:100%;
 }
 
