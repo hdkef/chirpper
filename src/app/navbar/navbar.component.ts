@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,11 +8,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  constructor() { }
+
   open = false
 
   @Output() hamburger = new EventEmitter<boolean>()
-
-  constructor() { }
 
   ngOnInit(): void {
   }
@@ -20,7 +21,5 @@ export class NavbarComponent implements OnInit {
     this.open = !this.open
     this.hamburger.emit(this.open)
   }
-
-
 
 }

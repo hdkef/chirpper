@@ -9,10 +9,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   constructor() { }
 
-  ngOnDestroy(): void {
-    window.removeEventListener("resize",()=>{})
-  }
-
   ngOnInit(): void {
     window.addEventListener("resize", function(event) {
       if (window.matchMedia('screen and (max-width: 1000px)').matches) {
@@ -20,7 +16,7 @@ export class MainComponent implements OnInit, OnDestroy {
       }else{
         document.getElementById("left").style.display = "block";
       }
-  })
+    })
   }
 
   hamburgerListener($value){
@@ -29,6 +25,10 @@ export class MainComponent implements OnInit, OnDestroy {
     }else{
       document.getElementById("left").style.display = "none"
     }
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener("resize",()=>{})
   }
 
 }
