@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
+import { FindComponent } from './find/find.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { UserComponent } from './user/user.component';
+
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    FindComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path:'',component:LoginComponent}
+      {path:'',component:FindComponent}
     ]),
     SharedModule
   ]
 })
-export class LoginModule { }
+export class FindModule { }

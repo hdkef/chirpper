@@ -1,0 +1,33 @@
+#container {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color:indigo;
+    font-weight: bold;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    color:black
+}
+
+#info {
+    text-align: center;
+}
+
+#info h2{
+    display: block;
+    margin-top:15px;
+}
+
+#info img {
+    display: block;
+    margin-top:20vh;
+    width:40vw;
+}

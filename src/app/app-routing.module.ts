@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ErrorComponent } from './error/error.component';
 import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
@@ -16,9 +17,13 @@ const routes: Routes = [
   {path:'profile', component:MainComponent,loadChildren:()=>{
     return import('./profile/profile.module').then(m=>{return m.ProfileModule})
   }},
+  {path:'find', component:MainComponent,loadChildren:()=>{
+    return import('./find/find.module').then(m=>{return m.FindModule})
+  }},
   {path:'about', component:MainComponent,loadChildren:()=>{
     return import('./about/about.module').then(m=>{return m.AboutModule})
   }},
+  {path:'**',component:ErrorComponent}
 ];
 
 @NgModule({

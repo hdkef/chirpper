@@ -4,9 +4,6 @@ import { FeedComponent } from './feed/feed.component';
 import { RouterModule } from '@angular/router';
 import { ChirpComponent } from './chirp/chirp.component';
 import { SharedModule } from '../shared/shared.module';
-import {MatButtonModule} from '@angular/material/button'
-import {MatInputModule} from '@angular/material/input'
-import {MatCardModule} from '@angular/material/card'
 
 
 @NgModule({
@@ -19,9 +16,7 @@ import {MatCardModule} from '@angular/material/card'
     RouterModule.forChild([
       {path:'',component:FeedComponent}
     ]),
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule
+    SharedModule
   ],
 })
 export class FeedModule { }

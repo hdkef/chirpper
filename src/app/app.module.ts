@@ -7,6 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MainComponent,
     SideBarComponent,
     NavbarComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
