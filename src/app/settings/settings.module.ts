@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from './profile/profile.component';
+import { SettingsComponent } from './settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { ChirpComponent } from './chirp/chirp.component';
 
 
 
 @NgModule({
   declarations: [
-    ProfileComponent,
-    ChirpComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path:'',component:ProfileComponent}
+      {path:'',component:SettingsComponent}
     ]),
     SharedModule
-  ],
+  ]
 })
-export class ProfileModule { }
+export class SettingsModule { }

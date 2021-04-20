@@ -23,6 +23,9 @@ const routes: Routes = [
   {path:'about', component:MainComponent,loadChildren:()=>{
     return import('./about/about.module').then(m=>{return m.AboutModule})
   }},
+  {path:'settings', component:MainComponent,loadChildren:()=>{
+    return import('./settings/settings.module').then(m=>{return m.SettingsModule})
+  }},
   {path:'**',component:ErrorComponent}
 ];
 
