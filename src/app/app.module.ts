@@ -8,6 +8,11 @@ import { MainComponent } from './main/main.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorComponent } from './error/error.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import * as fromAppReducer from './redux/reducers/app-reducer'
+import { HttpClientModule } from '@angular/common/http';
+import {AuthEffect} from './redux/effects/auth-effect'
 
 @NgModule({
   declarations: [
@@ -20,7 +25,10 @@ import { ErrorComponent } from './error/error.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NoopAnimationsModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    StoreModule.forRoot(fromAppReducer.appReducer),
+    EffectsModule.forRoot([AuthEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]

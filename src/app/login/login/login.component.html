@@ -1,18 +1,18 @@
 <div id="container">
     <mat-card id="card">
         <mat-card-title id="login-title">Login</mat-card-title>
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
             <div id="login-input">
                 <mat-form-field>
-                    <input matInput placeholder="username">
+                    <input matInput placeholder="Username" type="text" formControlName="Username">
                 </mat-form-field>
     
                 <mat-form-field>
-                    <input matInput placeholder="password" type="password">
+                    <input matInput placeholder="Password" type="password" formControlName="Password">
                 </mat-form-field>
             </div>
             <div id="button-group">
-                <button mat-raised-button color="accent">login</button>
+                <button mat-raised-button color="accent" type="submit" [disabled]="this.loginForm.invalid">login</button>
                 <a routerLink='/register' style="text-decoration: none;"><button mat-stroked-button color="primary">register</button></a>
             </div>
         </form>
