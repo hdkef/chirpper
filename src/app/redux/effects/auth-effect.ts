@@ -20,12 +20,11 @@ export class AuthEffect {
                         let ID = data["ID"]
                         let Username = data["Username"]
                         let Email = data["Email"]
-                        console.log(ID,Username,Email)
                         return new fromAuthAction.LoginSuccess({ID,Username,Email})
                     }),
                     catchError((err)=>{
-                        let errormsg = err.error
-                        return of(new fromAuthAction.SendInfo({Info:errormsg}))
+                        let errmsg = err.error
+                        return of(new fromAuthAction.SendInfo({Info:errmsg}))
                     })
                 )
             })
@@ -40,7 +39,6 @@ export class AuthEffect {
                 return this.http.post(`${environment.api}/register`,payloadJSON).pipe(
                     map((data)=>{
                         let msg = data["MESSAGE"]
-                        console.log(msg)
                         return new fromAuthAction.SendInfo({Info:msg})
                     }),
                     catchError((err)=>{
