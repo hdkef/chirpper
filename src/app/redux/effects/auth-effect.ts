@@ -15,7 +15,7 @@ export class AuthEffect {
             ofType(fromAuthAction.LOGIN_START),
             switchMap((action:fromAuthAction.LoginStart)=>{
                 let payloadJSON = JSON.stringify(action.payload)
-                return this.http.post(`${environment.api}/login`,payloadJSON).pipe(
+                return this.http.post(`${environment.api}${environment.loginroute}`,payloadJSON).pipe(
                     map((data)=>{
                         let ID = data["ID"]
                         let Username = data["Username"]
@@ -36,7 +36,7 @@ export class AuthEffect {
             ofType(fromAuthAction.REGISTER_START),
             switchMap((action:fromAuthAction.RegisterStart)=>{
                 let payloadJSON = JSON.stringify(action.payload)
-                return this.http.post(`${environment.api}/register`,payloadJSON).pipe(
+                return this.http.post(`${environment.api}${environment.registerroute}`,payloadJSON).pipe(
                     map((data)=>{
                         let msg = data["MESSAGE"]
                         return new fromAuthAction.SendInfo({Info:msg})
