@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
     let Code = this.registerForm.value.Code
     return this.http.post(`${environment.api}${environment.verifyemailverroute}`,JSON.stringify({Email:Email,Code:Code}))
     .pipe(tap((data)=>{
-      console.log("EMAILVER", data)
       if (data == true){
         this.store.dispatch(new fromAuthAction.RegisterStart({Username,Password,Email}))
       }else{

@@ -16,6 +16,7 @@ import {AuthEffect} from './redux/effects/auth-effect'
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
 import { BearerInterceptor } from './bearer.interceptor';
+import { EndpointsEffect } from './redux/effects/endpoints-effect';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { BearerInterceptor } from './bearer.interceptor';
     HttpClientModule,
     NoopAnimationsModule,
     StoreModule.forRoot(fromAppReducer.appReducer),
-    EffectsModule.forRoot([AuthEffect])
+    EffectsModule.forRoot([AuthEffect, EndpointsEffect])
   ],
   providers: [AuthGuard,LoginGuard,{provide:HTTP_INTERCEPTORS,useClass:BearerInterceptor,multi:true}],
   bootstrap: [AppComponent]

@@ -1,10 +1,10 @@
 import { Action } from "@ngrx/store"
 
-export const LOGIN_START = "LOGIN START"
-export const REGISTER_START = "REGISTER START"
-export const LOGIN_SUCCESS = "LOGIN SUCCESS"
-export const SEND_INFO = "SEND_INFO"
-export const AUTOLOGIN_START = "AUTO_LOGIN"
+export const LOGIN_START = "AUTH LOGIN START"
+export const REGISTER_START = "AUTH REGISTER START"
+export const LOGIN_SUCCESS = "AUTH LOGIN SUCCESS"
+export const SEND_INFO = "AUTH SEND_INFO"
+export const AUTOLOGIN_START = "AUTH AUTO_LOGIN"
 
 export class LoginStart implements Action {
     type: string = LOGIN_START
@@ -16,6 +16,7 @@ export class LoginStart implements Action {
 
 export class AutoLoginStart implements Action {
     type: string = AUTOLOGIN_START
+    constructor(public payload){}
 }
 
 export class RegisterStart implements Action {
@@ -44,4 +45,4 @@ export class SendInfo implements Action {
     }){}
 }
 
-export type AuthActionType = LoginStart | RegisterStart | LoginSuccess | SendInfo
+export type AuthActionType = LoginStart | RegisterStart | LoginSuccess | SendInfo | AutoLoginStart

@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   login(){
     let Username = this.loginForm.value.Username
     let Password = this.loginForm.value.Password
-    console.log(JSON.stringify({Username:Username,Password:Password}))
     this.store.dispatch(new fromAuthAction.LoginStart({Username,Password}))
   }
 

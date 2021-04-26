@@ -15,29 +15,14 @@ export class BearerInterceptor implements HttpInterceptor {
 
   constructor(private store:Store<fromAppReducer.AppState>) { }
 
-  addToken(req:HttpRequest<any>): Observable<HttpRequest<any>>{
-    return this.store.pipe(
-      select("auth"),
-      first(),
-      mergeMap((state,_)=>{
-        if (state.Token != ""){
-          let token = state.Token
-          let authorizedReq = req.clone({headers:req.headers.append("BEARER",token)})
-          return of(authorizedReq)
-        }
-        else{of(req)}
-      })
-    )
-  }
-
   intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-    let tokenGet = JSON.parse(localStorage.getItem("userData"))
-    if (tokenGet == null) {
+ 
+    let token = JSON.parse(localStorage.getItem("BEARER"))["Token"]
+    if (!token) {
       return next.handle(req)
     }
     else {
-      let tokenHead = `bearer ${tokenGet["Token"]}`
-      let authorizedReq = req.clone({headers:req.headers.append("Auth",tokenHead)})
+      let authorizedReq = req.clone({headers:req.headers.append("BEARER",token)})
       return next.handle(authorizedReq)
     }
   }
