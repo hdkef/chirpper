@@ -11,10 +11,11 @@ import { ErrorComponent } from './error/error.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromAppReducer from './redux/reducers/app-reducer'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {AuthEffect} from './redux/effects/auth-effect'
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
+import { BearerInterceptor } from './bearer.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { LoginGuard } from './login.guard';
     StoreModule.forRoot(fromAppReducer.appReducer),
     EffectsModule.forRoot([AuthEffect])
   ],
-  providers: [AuthGuard,LoginGuard],
+  providers: [AuthGuard,LoginGuard,{provide:HTTP_INTERCEPTORS,useClass:BearerInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
