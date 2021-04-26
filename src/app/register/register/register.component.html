@@ -15,13 +15,13 @@
                     <input matInput placeholder="Email" type="email" formControlName="Email">
                 </mat-form-field>
 
-                <div>
-                    <button [disabled]="this.registerForm.get('Email').invalid || this.verifSent" mat-button type="button" style="width: 100%;" (click)="sendCode()">send Code</button>
-                </div>
-
                 <mat-form-field>
                     <input matInput placeholder="Code verification" type="text" formControlName="Code">
                 </mat-form-field>
+
+                <div>
+                    <button [disabled]="this.registerForm.get('Email').invalid || this.verifSent" mat-button type="button" style="width: 100%;" (click)="sendCode()">send Code</button>
+                </div>
 
             </div>
             <div id="button-group">

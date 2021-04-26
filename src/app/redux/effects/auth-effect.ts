@@ -20,6 +20,8 @@ export class AuthEffect {
                         let ID = data["ID"]
                         let Username = data["Username"]
                         let Email = data["Email"]
+                        let Token = data["Token"]
+                        this.saveToLocal({ID,Username,Email,Token})
                         return new fromAuthAction.LoginSuccess({ID,Username,Email})
                     }),
                     catchError((err)=>{
@@ -49,5 +51,28 @@ export class AuthEffect {
             })
         )
     })
+
+    autoLogin$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(fromAuthAction.AUTOLOGIN_START),
+            switchMap((action:fromAuthAction.AutoLoginStart)=>{
+                console.log("AUTOLOGIN")
+                console.log(localStorage.getItem("BEARER"))
+                if(localStorage.getItem("BEARER")){
+                    let parsedJSON = JSON.parse(localStorage.getItem("BEARER"))
+                    let ID = parsedJSON["ID"]
+                    let Username = parsedJSON["Username"]
+                    let Email = parsedJSON["Email"]
+                    return of(new fromAuthAction.LoginSuccess({ID,Username,Email}))
+                }else{
+                    return of(new fromAuthAction.SendInfo({Info:""}))
+                }
+            })
+        )
+    })
+
+    saveToLocal(payload:{ID,Username,Email,Token}){
+        localStorage.setItem("BEARER",JSON.stringify(payload))
+    }
 
 }

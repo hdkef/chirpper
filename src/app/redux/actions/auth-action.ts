@@ -4,6 +4,7 @@ export const LOGIN_START = "LOGIN START"
 export const REGISTER_START = "REGISTER START"
 export const LOGIN_SUCCESS = "LOGIN SUCCESS"
 export const SEND_INFO = "SEND_INFO"
+export const AUTOLOGIN_START = "AUTO_LOGIN"
 
 export class LoginStart implements Action {
     type: string = LOGIN_START
@@ -11,6 +12,10 @@ export class LoginStart implements Action {
         Username:string,
         Password:string,
     }){}
+}
+
+export class AutoLoginStart implements Action {
+    type: string = AUTOLOGIN_START
 }
 
 export class RegisterStart implements Action {
@@ -28,6 +33,7 @@ export class LoginSuccess implements Action {
         ID:string,
         Username:string,
         Email:string,
+        Token:string,
     }){}
 }
 
