@@ -5,6 +5,7 @@ export const REGISTER_START = "AUTH REGISTER START"
 export const LOGIN_SUCCESS = "AUTH LOGIN SUCCESS"
 export const SEND_INFO = "AUTH SEND_INFO"
 export const AUTOLOGIN_START = "AUTH AUTO_LOGIN"
+export const LOGOUT_START = "AUTH LOGOUT START"
 
 export class LoginStart implements Action {
     type: string = LOGIN_START
@@ -45,4 +46,9 @@ export class SendInfo implements Action {
     }){}
 }
 
-export type AuthActionType = LoginStart | RegisterStart | LoginSuccess | SendInfo | AutoLoginStart
+export class LogoutStart implements Action {
+    type:string = LOGOUT_START
+    constructor(public payload){}
+}
+
+export type AuthActionType = LoginStart | RegisterStart | LoginSuccess | SendInfo | AutoLoginStart | LogoutStart

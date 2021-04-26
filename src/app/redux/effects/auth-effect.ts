@@ -5,10 +5,11 @@ import { catchError, map, switchMap } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { of } from "rxjs";
 import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthEffect {
-    constructor(private actions$:Actions, private http:HttpClient){}
+    constructor(private actions$:Actions, private http:HttpClient, private router:Router){}
 
     loginStart$ = createEffect(()=>{
         return this.actions$.pipe(
@@ -70,8 +71,23 @@ export class AuthEffect {
         )
     })
 
+    logoutStart$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(fromAuthAction.LOGOUT_START),
+            switchMap((action:fromAuthAction.LogoutStart)=>{
+                this.removeLocal()
+                this.router.navigateByUrl('/login')
+                return of(new fromAuthAction.SendInfo({Info:"logged out"}))
+            })
+        )
+    })
+
     saveToLocal(payload:{ID,Username,Email,Token}){
         localStorage.setItem("BEARER",JSON.stringify(payload))
+    }
+
+    removeLocal(){
+        localStorage.removeItem("BEARER")
     }
 
 }

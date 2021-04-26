@@ -17,6 +17,7 @@ import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
 import { BearerInterceptor } from './bearer.interceptor';
 import { EndpointsEffect } from './redux/effects/endpoints-effect';
+import { LogoutInterceptor } from './logout.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,10 @@ import { EndpointsEffect } from './redux/effects/endpoints-effect';
     StoreModule.forRoot(fromAppReducer.appReducer),
     EffectsModule.forRoot([AuthEffect, EndpointsEffect])
   ],
-  providers: [AuthGuard,LoginGuard,{provide:HTTP_INTERCEPTORS,useClass:BearerInterceptor,multi:true}],
+  providers: [AuthGuard,LoginGuard,
+    {provide:HTTP_INTERCEPTORS,useClass:BearerInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LogoutInterceptor,multi:true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

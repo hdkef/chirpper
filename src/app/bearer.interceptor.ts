@@ -17,11 +17,12 @@ export class BearerInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
  
-    let token = JSON.parse(localStorage.getItem("BEARER"))["Token"]
-    if (!token) {
+    let tokenSaved = localStorage.getItem("BEARER")
+    if (!tokenSaved) {
       return next.handle(req)
     }
     else {
+      let token = JSON.parse(tokenSaved)["Token"]
       let authorizedReq = req.clone({headers:req.headers.append("BEARER",token)})
       return next.handle(authorizedReq)
     }

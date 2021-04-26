@@ -38,6 +38,8 @@ export function authReducer (
             }
         case fromAuthAction.AUTOLOGIN_START:
             return state
+        case fromAuthAction.LOGOUT_START:
+            return {...initialState}
         default:
             return {...initialState}
     }
