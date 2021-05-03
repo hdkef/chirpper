@@ -11,8 +11,5 @@
             </form>
         </div>
     </div>
-    <app-chirp></app-chirp>
-    <app-chirp></app-chirp>
-    <app-chirp></app-chirp>
-    <app-chirp></app-chirp>
+    <app-chirp *ngFor="let chirp of feed" [chirp]="chirp"></app-chirp>
 </div>

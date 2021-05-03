@@ -15,9 +15,10 @@ export class EndpointsEffect {
         return this.actions$.pipe(
             ofType(fromEndpointsAction.VERIFY_TOKEN),
             switchMap((action:fromEndpointsAction.VerifyToken)=>{
+                console.log("checkToken")
                 return this.http.get(`${environment.api}${environment.verifytokenroute}`).pipe(
                     map((data)=>{
-                        return new fromEndpointsAction.InitWS()
+                        return new fromEndpointsAction.InitWS({})
                     }),
                     catchError((err)=>{
                         return of(new fromEndpointsAction.SendInfo({Info:""}))

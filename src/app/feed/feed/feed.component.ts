@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WSService } from 'src/app/ws-service/ws-service';
 import { MsgPayload } from 'src/app/models/msgpayload';
+import { Feed } from 'src/app/models/feed';
 
 @Component({
   selector: 'app-feed',
@@ -16,16 +17,18 @@ export class FeedComponent implements OnInit {
 
   constructor(private store:Store<fromAppReducer.AppState>, private ws:WSService) { }
 
-  authSubs:Subscription
+  endpointsSubs:Subscription
   postForm:FormGroup
+  feed:Feed[]
 
   ngOnInit(): void {
 
-    this.authSubs = this.store.select("auth").subscribe((data)=>{
-
+    this.endpointsSubs = this.store.select("endpoints").subscribe((data)=>{
+      console.log("feed",data["feed"])
+      this.feed = data["feed"]
     })
 
-    this.store.dispatch(new fromEndpointsAction.VerifyToken())
+    this.store.dispatch(new fromEndpointsAction.VerifyToken({}))
 
     this.postForm = new FormGroup({
       'Text':new FormControl(null,Validators.required)

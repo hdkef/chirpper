@@ -1,6 +1,10 @@
 import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
 import { environment } from "src/environments/environment";
 import { MsgPayload } from "../models/msgpayload";
+import * as fromAppReducer from "../redux/reducers/app-reducer"
+import * as fromEndpointsAction from "../redux/actions/endpoints-action"
+import {Feed} from '../models/feed'
 
 @Injectable()
 export class WSService {
@@ -10,10 +14,12 @@ export class WSService {
     Username:string
     Email:string
 
-    constructor(){}
+    constructor(private store:Store<fromAppReducer.AppState>){}
 
     establishWS(){
         this.socket = new WebSocket(`${environment.ws}${environment.initwsroute}`)
+
+        this.store.select("endpoints").subscribe()
         
         let localJSON = JSON.parse(localStorage.getItem("BEARER"))
         this.ID = localJSON["ID"]
@@ -35,13 +41,16 @@ export class WSService {
             this.socket.send(JSON.stringify(payloadToBeSent))
         }
         this.socket.onmessage = (event) => {
-            console.log(event.data)
-            switch (event.data["Type"]){
+            let data = JSON.parse(event.data)
+            switch (data["Type"]){
                 case "initFromServer":
-                    //implements render feed data
-                    console.log("initFromServer", event.data["Data"])
+                    //implements render feed data (ngrx)
+                    this.store.dispatch(new fromEndpointsAction.AppendManyFeed(data["Data"]))
+                    break
                 case "postFromServer":
-                    //implement append new feed data
+                    //implement append new feed data (ngrx)
+                    this.store.dispatch(new fromEndpointsAction.AppendOneFeed(data))
+                    break
             }
         }
     }
