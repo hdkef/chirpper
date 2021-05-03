@@ -5,4 +5,5 @@ export const environment = {
   registerroute:"/auth/register",
   sendemailverroute:"/auth/sendemailver",
   verifyemailverroute:"/auth/verifyemailver",
+  verifytokenroute:"/endpoints/verifytoken",
 };

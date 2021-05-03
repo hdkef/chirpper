@@ -5,11 +5,13 @@
 export const environment = {
   production: false,
   api:"http://localhost:4040",
+  ws:"ws://localhost:4040",
   loginroute:"/auth/login",
   registerroute:"/auth/register",
   sendemailverroute:"/auth/sendemailver",
   verifyemailverroute:"/auth/verifyemailver",
-  getfeedroute:"/endpoints/feed",
+  verifytokenroute:"/endpoints/checktoken",
+  initwsroute:"/endpoints/ws"
 };
 
 /*

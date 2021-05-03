@@ -1,10 +1,15 @@
 import { Action } from "@ngrx/store";
 
-export const FEED_START = "ENDPOINTS FEED START"
+export const VERIFY_TOKEN = "ENDPOINTS FEED START"
+export const INIT_WS = "ENDPOINTS INIT WS"
 export const SEND_INFO = "ENDPOINTS SEND INFO"
 
-export class FeedStart implements Action{
-    type: string = FEED_START
+export class VerifyToken implements Action{
+    type: string = VERIFY_TOKEN
+}
+
+export class InitWS implements Action{
+    type: string = INIT_WS
 }
 
 export class SendInfo implements Action{
@@ -12,4 +17,4 @@ export class SendInfo implements Action{
     constructor(public payload:{Info:string}){}
 }
 
-export type EndpointsActionType = FeedStart | SendInfo
+export type EndpointsActionType = VerifyToken | SendInfo

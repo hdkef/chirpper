@@ -1,12 +1,12 @@
 <div id="container">
     <div id="post">
         <div id="post-wrapper">
-            <form>
+            <form [formGroup]="postForm" (ngSubmit)="sendChirp()">
                 <mat-form-field>
-                    <textarea matInput placeholder="what's happening?.."></textarea>
+                    <textarea matInput placeholder="what's happening?.." formControlName="Text"></textarea>
                 </mat-form-field>
                 <div id="button-group">
-                    <button mat-raised-button color="primary">chirp</button>
+                    <button mat-raised-button color="primary" [disabled]="postForm.invalid">chirp</button>
                 </div>
             </form>
         </div>
