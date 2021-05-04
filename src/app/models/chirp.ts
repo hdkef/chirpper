@@ -1,4 +1,4 @@
-export interface Feed {
+export interface Chirp {
     PostID:string,
     Username:string,
     ImageURL:string,

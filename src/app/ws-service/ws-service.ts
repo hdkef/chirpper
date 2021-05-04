@@ -4,7 +4,6 @@ import { environment } from "src/environments/environment";
 import { MsgPayload } from "../models/msgpayload";
 import * as fromAppReducer from "../redux/reducers/app-reducer"
 import * as fromEndpointsAction from "../redux/actions/endpoints-action"
-import {Feed} from '../models/feed'
 
 @Injectable()
 export class WSService {
@@ -13,18 +12,19 @@ export class WSService {
     ID:string
     Username:string
     Email:string
+    Bearer:string
 
     constructor(private store:Store<fromAppReducer.AppState>){}
 
     establishWS(){
         this.socket = new WebSocket(`${environment.ws}${environment.initwsroute}`)
-
-        this.store.select("endpoints").subscribe()
         
         let localJSON = JSON.parse(localStorage.getItem("BEARER"))
+        
         this.ID = localJSON["ID"]
         this.Username = localJSON["Username"]
         this.Email = localJSON["Email"]
+        this.Bearer = localJSON["Token"]
         
         this.socket.onopen = () => {
             console.log("websocket established")
@@ -36,6 +36,7 @@ export class WSService {
                 Email:this.Email,
                 ImageURL:null,
                 Text:null,
+                Bearer:this.Bearer,
             }
 
             this.socket.send(JSON.stringify(payloadToBeSent))
@@ -63,6 +64,7 @@ export class WSService {
             Email:this.Email,
             Text:payload.Text,
             ImageURL:payload.ImageURL,
+            Bearer:this.Bearer,
         }
         this.socket.send(JSON.stringify(payloadToBeSent))
     }

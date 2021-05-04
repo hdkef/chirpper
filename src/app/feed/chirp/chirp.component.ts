@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Feed } from 'src/app/models/feed';
+import { Chirp } from 'src/app/models/chirp';
 
 @Component({
   selector: 'app-chirp',
@@ -8,7 +8,7 @@ import { Feed } from 'src/app/models/feed';
 })
 export class ChirpComponent implements OnInit {
 
-  @Input()chirp:Feed
+  @Input()chirp:Chirp
 
   constructor() { }
 

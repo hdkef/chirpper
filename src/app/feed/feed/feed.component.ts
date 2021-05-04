@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WSService } from 'src/app/ws-service/ws-service';
 import { MsgPayload } from 'src/app/models/msgpayload';
-import { Feed } from 'src/app/models/feed';
+import { Chirp } from 'src/app/models/chirp';
 
 @Component({
   selector: 'app-feed',
@@ -19,7 +19,7 @@ export class FeedComponent implements OnInit {
 
   endpointsSubs:Subscription
   postForm:FormGroup
-  feed:Feed[]
+  feed:Chirp[]
 
   ngOnInit(): void {
 
@@ -29,11 +29,13 @@ export class FeedComponent implements OnInit {
     })
 
     this.store.dispatch(new fromEndpointsAction.VerifyToken({}))
+    this.initiatePostForm()
+  }
 
+  initiatePostForm(){
     this.postForm = new FormGroup({
       'Text':new FormControl(null,Validators.required)
     })
-
   }
 
   sendChirp(){
@@ -44,6 +46,10 @@ export class FeedComponent implements OnInit {
       Text:Text,
     }
     this.ws.sendMsgPayload(payloadToBeSent)
+    this.postForm.setValue({'Text':null})
+    this.postForm.markAsPristine()
+    this.postForm.markAsUntouched()
+    this.postForm.controls.Text.setErrors(null)
   }
 
 }

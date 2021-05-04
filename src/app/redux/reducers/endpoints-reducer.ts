@@ -1,8 +1,8 @@
-import { Feed } from 'src/app/models/feed'
+import { Chirp } from 'src/app/models/chirp'
 import * as fromEndpointsAction from '../actions/endpoints-action'
 
 export interface State {
-    feed:Feed[],
+    feed:Chirp[],
 }
 
 const initialState:State = {
@@ -20,11 +20,11 @@ export function EndpointsReducer(
             return state
         case fromEndpointsAction.APPEND_MANY_FEED:
             console.log("reducer many", action.payload)
-            let Feed:Feed[] = action.payload.concat(state.feed)
+            let Feed:Chirp[] = action.payload.concat(state.feed)
             return {...state,feed:Feed}
         case fromEndpointsAction.APPEND_ONE_FEED:
             console.log("reducer one", action.payload)
-            let Feed2:Feed[] = [...state.feed]
+            let Feed2:Chirp[] = [...state.feed]
             Feed2.unshift(action.payload)
             console.log(Feed2)
             return {...state,feed:Feed2}

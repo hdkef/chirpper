@@ -5,4 +5,5 @@ export interface MsgPayload {
     Email:string,
     ImageURL:string,
     Text:string,
+    Bearer:string,
 }

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Feed } from "src/app/models/feed";
+import { Chirp } from "src/app/models/chirp";
 
 export const VERIFY_TOKEN = "ENDPOINTS FEED START"
 export const INIT_WS = "ENDPOINTS INIT WS"
@@ -14,12 +14,12 @@ export class VerifyToken implements Action{
 
 export class AppendManyFeed implements Action {
     type:string = APPEND_MANY_FEED
-    constructor(public payload:Feed[]){}
+    constructor(public payload:Chirp[]){}
 }
 
 export class AppendOneFeed implements Action {
     type:string = APPEND_ONE_FEED
-    constructor(public payload:Feed){}
+    constructor(public payload:Chirp){}
 }
 
 export class InitWS implements Action{
