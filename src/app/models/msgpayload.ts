@@ -6,4 +6,5 @@ export interface MsgPayload {
     ImageURL:string,
     Text:string,
     Bearer:string,
+    AvatarURL:string,
 }

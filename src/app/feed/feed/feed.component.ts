@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as fromAppReducer from '../../redux/reducers/app-reducer'
 import * as fromEndpointsAction from '../../redux/actions/endpoints-action'
 import { Store } from '@ngrx/store';
@@ -13,9 +13,15 @@ import { Chirp } from 'src/app/models/chirp';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnDestroy {
 
   constructor(private store:Store<fromAppReducer.AppState>, private ws:WSService) { }
+  
+  ngOnDestroy(): void {
+    if (this.endpointsSubs){
+      this.endpointsSubs.unsubscribe()
+    }
+  }
 
   endpointsSubs:Subscription
   postForm:FormGroup

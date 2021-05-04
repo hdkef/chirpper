@@ -22,8 +22,9 @@ export class AuthEffect {
                         let Username = data["Username"]
                         let Email = data["Email"]
                         let Token = data["Token"]
-                        this.saveToLocal({ID,Username,Email,Token})
-                        return new fromAuthAction.LoginSuccess({ID,Username,Email,Token})
+                        let AvatarURL = data["AvatarURL"]
+                        this.saveToLocal({ID,Username,Email,Token,AvatarURL})
+                        return new fromAuthAction.LoginSuccess({ID,Username,Email,Token,AvatarURL})
                     }),
                     catchError((err)=>{
                         let errmsg = err.error
@@ -63,7 +64,8 @@ export class AuthEffect {
                     let Username = parsedJSON["Username"]
                     let Email = parsedJSON["Email"]
                     let Token = parsedJSON["Token"]
-                    return of(new fromAuthAction.LoginSuccess({ID,Username,Email,Token}))
+                    let AvatarURL = parsedJSON["AvatarURL"]
+                    return of(new fromAuthAction.LoginSuccess({ID,Username,Email,Token,AvatarURL}))
                 }else{
                     return of(new fromAuthAction.SendInfo({Info:""}))
                 }
@@ -82,7 +84,7 @@ export class AuthEffect {
         )
     })
 
-    saveToLocal(payload:{ID,Username,Email,Token}){
+    saveToLocal(payload:{ID,Username,Email,Token,AvatarURL}){
         localStorage.setItem("BEARER",JSON.stringify(payload))
     }
 

@@ -13,6 +13,7 @@ export class WSService {
     Username:string
     Email:string
     Bearer:string
+    AvatarURL:string
 
     constructor(private store:Store<fromAppReducer.AppState>){}
 
@@ -25,6 +26,7 @@ export class WSService {
         this.Username = localJSON["Username"]
         this.Email = localJSON["Email"]
         this.Bearer = localJSON["Token"]
+        this.AvatarURL = localJSON["AvatarURL"]
         
         this.socket.onopen = () => {
             console.log("websocket established")
@@ -37,6 +39,7 @@ export class WSService {
                 ImageURL:null,
                 Text:null,
                 Bearer:this.Bearer,
+                AvatarURL:this.AvatarURL,
             }
 
             this.socket.send(JSON.stringify(payloadToBeSent))
@@ -65,6 +68,7 @@ export class WSService {
             Text:payload.Text,
             ImageURL:payload.ImageURL,
             Bearer:this.Bearer,
+            AvatarURL:this.AvatarURL,
         }
         this.socket.send(JSON.stringify(payloadToBeSent))
     }

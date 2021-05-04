@@ -1,17 +1,15 @@
 <mat-card>
     <mat-card-header>
-      <div mat-card-avatar style="background-size: cover;" [ngStyle]="{'background-image': 'url('+ 'https://pbs.twimg.com/profile_images/1363210545118150659/Uo-XiGtv_400x400.jpg' +')'}"></div>
+      <div mat-card-avatar style="background-size: cover;" [ngStyle]="{'background-image': 'url(' + chirp.AvatarURL + ')'}"></div>
       <mat-card-title>{{chirp.Username}}</mat-card-title>
-      <mat-card-subtitle>14th june 2021</mat-card-subtitle>
+      <mat-card-subtitle>{{chirp.Date}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>
         {{chirp.Text}}
       </p>
     </mat-card-content>
-    <mat-card-subtitle style="margin:0;padding:0;">Liked by 10 people</mat-card-subtitle>
     <mat-card-actions>
-      <button mat-stroked-button>LIKE</button>
       <button mat-stroked-button>RECHIRP</button>
     </mat-card-actions>
 </mat-card>

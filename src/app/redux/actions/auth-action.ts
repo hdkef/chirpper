@@ -36,6 +36,7 @@ export class LoginSuccess implements Action {
         Username:string,
         Email:string,
         Token:string,
+        AvatarURL:string,
     }){}
 }
 
