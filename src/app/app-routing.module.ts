@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:'feed',canActivate:[AuthGuard], component:MainComponent,loadChildren:()=>{
     return import('./feed/feed.module').then(m=>{return m.FeedModule})
   }},
-  {path:'profile',canActivate:[AuthGuard], component:MainComponent,loadChildren:()=>{
+  {path:'profile',canActivate:[AuthGuard],component:MainComponent,loadChildren:()=>{
     return import('./profile/profile.module').then(m=>{return m.ProfileModule})
   }},
   {path:'find',canActivate:[AuthGuard], component:MainComponent,loadChildren:()=>{

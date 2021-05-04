@@ -2,31 +2,28 @@
     <mat-card>
         <div id="top">
             <div id="avatar">
-                <img style="border-radius: 10%;" src="https://pbs.twimg.com/profile_images/1363210545118150659/Uo-XiGtv_400x400.jpg">
+                <img style="border-radius: 10%;" [src]="AvatarURL">
             </div>
             <div>
                 <div id="nick">
                     <div>
-                        <h1>Shiba Inu</h1>
-                        <h4>I am a network engineer at AWS and a cat person.<br>I also on instagram @shibainu and i teach computer network on youtube @networkshiba</h4>
+                        <h1>{{Username}}</h1>
+                        <h4>{{Desc}}</h4>
                     </div>
                 </div>
             </div>
         </div>
         <div id="stats">
             <div class="stat">
-                <a routerLink="usr/followers"><h3> 782 Followers</h3></a>
+                <a routerLink="usr/followers"><h3> {{FollowerCount}} Followers</h3></a>
             </div>
             <div class="stat">
-                <a routerLink="usr/following"><h3>521 Following</h3></a>
+                <a routerLink="usr/following"><h3>{{FollowingCount}} Following</h3></a>
             </div>
         </div>
         <div id="button-group">
-            <button mat-raised-button color="primary">Follow Shiba Inu</button>
+            <button mat-raised-button color="primary">Follow {{Username}}</button>
         </div>
     </mat-card>
-    <app-chirp></app-chirp>
-    <app-chirp></app-chirp>
-    <app-chirp></app-chirp>
-    <app-chirp></app-chirp>
+    <app-chirp *ngFor="let chirp of Feed" [chirp]="chirp"></app-chirp>
 </div>

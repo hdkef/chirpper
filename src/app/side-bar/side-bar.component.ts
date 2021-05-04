@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromAppReducer from '../redux/reducers/app-reducer'
@@ -10,16 +11,22 @@ import * as fromAppReducer from '../redux/reducers/app-reducer'
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   authSubs:Subscription
+  ID:string
   Username:string
   AvatarURL:string
 
   ngOnInit(): void {
     let parsedJSON = JSON.parse(localStorage.getItem("BEARER"))
+    this.ID = parsedJSON["ID"]
     this.Username = parsedJSON["Username"]
     this.AvatarURL = parsedJSON["AvatarURL"]
+  }
+  
+  goProfile(){
+    this.router.navigate([`profile`],{queryParams:{ID:this.ID}})
   }
 
   logOut(){

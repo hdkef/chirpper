@@ -11,7 +11,8 @@ export const environment = {
   sendemailverroute:"/auth/sendemailver",
   verifyemailverroute:"/auth/verifyemailver",
   verifytokenroute:"/endpoints/checktoken",
-  initwsroute:"/endpoints/ws"
+  initwsroute:"/endpoints/ws",
+  profileroute:"/endpoints/profile",
 };
 
 /*
