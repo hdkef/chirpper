@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Search } from 'src/app/models/search';
 import { FindService } from '../find-service';
 
 @Component({
@@ -14,7 +15,7 @@ export class FindComponent implements OnInit {
 
   findSubs:Subscription
   findForm:FormGroup
-  result:any
+  result:Search[]
 
   ngOnInit(): void {
     this.findForm = new FormGroup({
