@@ -1,17 +1,15 @@
 <div id="container">
     <div id="post">
         <div id="post-wrapper">
-            <form>
+            <form [formGroup]="findForm" (ngSubmit)="proceedFind()">
                 <mat-form-field>
-                    <input matInput placeholder="who you're looking for ?..">
+                    <input matInput placeholder="who you're looking for ?.." formControlName="Searchkey">
                 </mat-form-field>
                 <div id="button-group">
-                    <button mat-raised-button color="primary">find</button>
+                    <button mat-raised-button color="primary" type="submit">find</button>
                 </div>
             </form>
         </div>
     </div>
-    <app-user></app-user>
-    <app-user></app-user>
-    <app-user></app-user>
+    <app-user *ngFor="let res of result" [user]="res"></app-user>
 </div>

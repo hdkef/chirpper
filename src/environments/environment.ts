@@ -13,6 +13,7 @@ export const environment = {
   verifytokenroute:"/endpoints/checktoken",
   initwsroute:"/endpoints/ws",
   profileroute:"/endpoints/profile",
+  searchroute:"/endpoints/search",
 };
 
 /*

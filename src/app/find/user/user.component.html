@@ -1,9 +1,9 @@
 <mat-card>
     <div id="center">
         <mat-card-header id="nickname">
-            <div mat-card-avatar style="background-size: cover;" [ngStyle]="{'background-image': 'url('+ 'https://pbs.twimg.com/profile_images/1363210545118150659/Uo-XiGtv_400x400.jpg' +')'}">
+            <div mat-card-avatar style="background-size: cover;" [ngStyle]="{'background-image': 'url(' + user.AvatarURL + ')'}">
             </div>
-            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-title>{{user.Username}}</mat-card-title>
         </mat-card-header>
         <div id="button-group">
             <button mat-stroked-button color="primary">Follow</button>

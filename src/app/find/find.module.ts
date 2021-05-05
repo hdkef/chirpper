@@ -4,6 +4,7 @@ import { FindComponent } from './find/find.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { UserComponent } from './user/user.component';
+import { FindService } from './find-service';
 
 
 
@@ -18,6 +19,7 @@ import { UserComponent } from './user/user.component';
       {path:'',component:FindComponent}
     ]),
     SharedModule
-  ]
+  ],
+  providers:[FindService]
 })
 export class FindModule { }
