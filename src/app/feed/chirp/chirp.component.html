@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-header>
       <div mat-card-avatar style="background-size: cover;" [ngStyle]="{'background-image': 'url(' + chirp.AvatarURL + ')'}"></div>
-      <mat-card-title>{{chirp.Username}}</mat-card-title>
+      <mat-card-title style="cursor: pointer;" (click)="goToProfile()">{{chirp.Username}}</mat-card-title>
       <mat-card-subtitle>{{chirp.Date}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

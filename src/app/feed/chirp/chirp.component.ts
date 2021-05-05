@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Chirp } from 'src/app/models/chirp';
 
 @Component({
@@ -10,9 +11,13 @@ export class ChirpComponent implements OnInit {
 
   @Input()chirp:Chirp
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToProfile(){
+    this.router.navigate([`profile`],{queryParams:{ID:this.chirp.ID}})
   }
 
 }
