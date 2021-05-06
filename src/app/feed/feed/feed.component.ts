@@ -30,7 +30,6 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.endpointsSubs = this.store.select("endpoints").subscribe((data)=>{
-      console.log("feed",data["feed"])
       this.feed = data["feed"]
     })
 

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http'
 import { of } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
+import * as fromEndpointsAction from '../actions/endpoints-action'
 
 @Injectable()
 export class AuthEffect {
@@ -80,6 +81,15 @@ export class AuthEffect {
                 this.removeLocal()
                 this.router.navigateByUrl('/login')
                 return of(new fromAuthAction.SendInfo({Info:"logged out"}))
+            })
+        )
+    })
+
+    loginSuccess$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(fromAuthAction.LOGIN_SUCCESS),
+            switchMap((action:fromAuthAction.LoginSuccess)=>{
+                return of(new fromEndpointsAction.InitWS({}))
             })
         )
     })

@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Chirp } from 'src/app/models/chirp';
 import { ProfileService } from '../profile-service';
+import * as fromAppReducer from '../../redux/reducers/app-reducer'
+import * as fromEndpointsAction from '../../redux/actions/endpoints-action'
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +14,7 @@ import { ProfileService } from '../profile-service';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
-  constructor(private profileservice:ProfileService, private route:ActivatedRoute) { }
+  constructor(private profileservice:ProfileService, private route:ActivatedRoute, private store:Store<fromAppReducer.AppState>) { }
   
   ngOnDestroy(): void {
     if (this.profileSubs){
@@ -30,6 +33,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileSubs:Subscription
 
   ngOnInit(): void {
+    this.store.dispatch(new fromEndpointsAction.VerifyToken({}))
     this.ID = this.route.snapshot.queryParamMap.get("ID")
     this.profileSubs = this.profileservice.getProfileInfo(this.ID).subscribe((data)=>{
       this.Username = data["Username"]

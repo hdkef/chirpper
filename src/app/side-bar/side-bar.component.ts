@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromAppReducer from '../redux/reducers/app-reducer'
+import * as fromAuthAction from '../redux/actions/auth-action'
 
 @Component({
   selector: 'app-side-bar',
@@ -11,7 +12,7 @@ import * as fromAppReducer from '../redux/reducers/app-reducer'
 })
 export class SideBarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private store:Store<fromAppReducer.AppState>) { }
 
   authSubs:Subscription
   ID:string
@@ -30,7 +31,7 @@ export class SideBarComponent implements OnInit {
   }
 
   logOut(){
-    alert("logged out")
+    this.store.dispatch(new fromAuthAction.LogoutStart({}))
   }
 
 }

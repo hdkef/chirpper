@@ -29,7 +29,6 @@ export class WSService {
         this.AvatarURL = localJSON["AvatarURL"]
         
         this.socket.onopen = () => {
-            console.log("websocket established")
 
             let payloadToBeSent:MsgPayload = {
                 Type:"initFromClient",

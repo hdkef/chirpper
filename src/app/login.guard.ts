@@ -9,18 +9,17 @@ import * as fromAppReducer from './redux/reducers/app-reducer'
 })
 export class LoginGuard implements CanActivate {
 
-  constructor(private store:Store<fromAppReducer.AppState>, private router:Router){}
+  constructor(private router:Router){}
 
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve,_)=>{
-      this.store.select("auth").subscribe((auth)=>{
-        if(auth["ID"] != ""){
-          this.router.navigateByUrl("/feed")
-          resolve(false)
-        }else{
-          resolve(true)
-        }
-      })
+      let token = localStorage.getItem("BEARER")
+      console.log("login guard ", token)
+      if(token){
+        resolve(false)
+      }else{
+        resolve(true)
+      }
     })
   }
   

@@ -15,13 +15,12 @@ export class EndpointsEffect {
         return this.actions$.pipe(
             ofType(fromEndpointsAction.VERIFY_TOKEN),
             switchMap((action:fromEndpointsAction.VerifyToken)=>{
-                console.log("checkToken")
                 return this.http.get(`${environment.api}${environment.verifytokenroute}`).pipe(
                     map((data)=>{
-                        return new fromEndpointsAction.InitWS({})
+                        return new fromEndpointsAction.SendInfo({Info:"token is valid"})
                     }),
                     catchError((err)=>{
-                        return of(new fromEndpointsAction.SendInfo({Info:""}))
+                        return of(new fromEndpointsAction.SendInfo({Info:err.error}))
                     })
                 )
             })
@@ -36,7 +35,7 @@ export class EndpointsEffect {
             }),
             switchMap(()=>{
                 return of(new fromEndpointsAction.SendInfo({Info:"websocket established"}))
-            })
+            }),
         )
     })
 }
