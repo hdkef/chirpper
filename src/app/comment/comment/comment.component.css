@@ -1,0 +1,15 @@
+#commentHeader {
+    margin-bottom: 20px;
+}
+
+#btn-group button{
+    width: 100%;
+}
+
+#txt mat-form-field {
+    width: 100%;
+}
+
+#txt mat-form-field textarea {
+    width: 100%;
+}

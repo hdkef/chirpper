@@ -66,14 +66,14 @@ export class CommentWS {
         
     }
 
-    sendMsgPayload(payload:{Type:string,ImageURL:string,Text:string}){
+    sendMsgPayload(Text:string){
         let payloadToBeSent:MsgPayload = {
             Type:"commentFromClient",
             ID:this.ID,
             Username:this.Username,
             Email:this.Email,
-            Text:payload.Text,
-            ImageURL:payload.ImageURL,
+            Text:Text,
+            ImageURL:null,
             Bearer:this.Bearer,
             AvatarURL:this.AvatarURL,
             PostID:this.PostID,

@@ -3,11 +3,13 @@ import * as fromEndpointsAction from '../actions/endpoints-action'
 
 export interface State {
     feed:Chirp[],
+    commentHeader:Chirp,
     comment:Chirp[],
 }
 
 const initialState:State = {
     feed:[],
+    commentHeader:null,
     comment:[],
 }
 
@@ -34,6 +36,10 @@ export function EndpointsReducer(
             let Feed2:Chirp[] = [...state.feed]
             Feed2.unshift(action.payload)
             return {...state,feed:Feed2}
+        case fromEndpointsAction.DESTROY_COMMENT:
+            return {...state,comment:[],commentHeader:null}
+        case fromEndpointsAction.COMMENT_HEADER:
+            return {...state,commentHeader:action.payload}
         default:
             return state
     }

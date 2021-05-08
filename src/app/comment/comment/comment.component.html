@@ -1,1 +1,16 @@
+<div id="commentHeader">
+    <app-chirp [chirp]="commentHeader"></app-chirp>
+</div>
+<div>
+    <form [formGroup]="commentForm" (ngSubmit)="sendComment()">
+        <div id="txt">
+            <mat-form-field appearance="fill">
+                <textarea matInput type="text" placeholder="add a comment here..." formControlName="Text"></textarea>
+            </mat-form-field>
+        </div>
+        <div id="btn-group">
+            <button mat-raised-button color="primary" [disabled]="commentForm.invalid">send</button>
+        </div>
+    </form>
+</div>
 <app-chirp *ngFor="let com of comment" [chirp]="com"></app-chirp>
