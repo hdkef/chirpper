@@ -20,8 +20,4 @@ export class ChirpComponent implements OnInit {
     this.router.navigate([`profile`],{queryParams:{ID:this.chirp.ID}})
   }
 
-  goComment(){
-    this.router.navigate([`comment`],{queryParams:{PostID:this.chirp.PostID}})
-  }
-
 }

@@ -3,13 +3,14 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
+import { CommentWS } from "src/app/comment/comment-ws";
 import { WSService } from "src/app/ws-service/ws-service";
 import { environment } from "src/environments/environment";
 import * as fromEndpointsAction from '../actions/endpoints-action'
 
 @Injectable()
 export class EndpointsEffect {
-    constructor(private actions$:Actions, private http:HttpClient, private ws:WSService){}
+    constructor(private actions$:Actions, private http:HttpClient, private ws:WSService, private wsComment:CommentWS){}
 
     verifyToken$ = createEffect(()=>{
         return this.actions$.pipe(
@@ -38,4 +39,18 @@ export class EndpointsEffect {
             }),
         )
     })
+
+
+    initComment$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(fromEndpointsAction.INIT_COMMENT),
+            tap((action:fromEndpointsAction.InitWS)=>{
+                this.wsComment.establishCommentWS(action.payload)
+            }),
+            switchMap(()=>{
+                return of(new fromEndpointsAction.SendInfo({Info:"websocket established"}))
+            })
+        )
+    })
+
 }

@@ -19,6 +19,9 @@ const routes: Routes = [
   {path:'profile',canActivate:[AuthGuard],component:MainComponent,loadChildren:()=>{
     return import('./profile/profile.module').then(m=>{return m.ProfileModule})
   }},
+  {path:'comment',canActivate:[AuthGuard],component:MainComponent,loadChildren:()=>{
+    return import('./comment/comment.module').then(m=>{return m.CommentModule})
+  }},
   {path:'find',canActivate:[AuthGuard], component:MainComponent,loadChildren:()=>{
     return import('./find/find.module').then(m=>{return m.FindModule})
   }},

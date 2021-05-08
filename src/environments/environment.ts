@@ -14,6 +14,7 @@ export const environment = {
   initwsroute:"/endpoints/ws",
   profileroute:"/endpoints/profile",
   searchroute:"/endpoints/search",
+  initcommentroute:"/endpoints/comment",
 };
 
 /*

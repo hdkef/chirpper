@@ -1,6 +1,7 @@
 export interface MsgPayload {
     Type:string,
     ID:string,
+    PostID:string,
     Username:string,
     Email:string,
     ImageURL:string,

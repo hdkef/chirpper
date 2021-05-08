@@ -33,7 +33,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileSubs:Subscription
 
   ngOnInit(): void {
-    this.store.dispatch(new fromEndpointsAction.VerifyToken({}))
     this.ID = this.route.snapshot.queryParamMap.get("ID")
     this.profileSubs = this.profileservice.getProfileInfo(this.ID).subscribe((data)=>{
       this.Username = data["Username"]

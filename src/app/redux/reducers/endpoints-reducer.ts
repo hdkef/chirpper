@@ -3,10 +3,12 @@ import * as fromEndpointsAction from '../actions/endpoints-action'
 
 export interface State {
     feed:Chirp[],
+    comment:Chirp[],
 }
 
 const initialState:State = {
     feed:[],
+    comment:[],
 }
 
 export function EndpointsReducer(
@@ -21,6 +23,13 @@ export function EndpointsReducer(
         case fromEndpointsAction.APPEND_MANY_FEED:
             let Feed:Chirp[] = action.payload.concat(state.feed)
             return {...state,feed:Feed}
+        case fromEndpointsAction.APPEND_MANY_COMMENT:
+            let Comment:Chirp[] = action.payload.concat(state.comment)
+            return {...state,comment:Comment}
+        case fromEndpointsAction.APPEND_ONE_COMMENT:
+            let Comment2:Chirp[] = [...state.comment]
+            Comment2.unshift(action.payload)
+            return {...state,comment:Comment2}
         case fromEndpointsAction.APPEND_ONE_FEED:
             let Feed2:Chirp[] = [...state.feed]
             Feed2.unshift(action.payload)

@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
+import * as fromAppReducer from "../redux/reducers/app-reducer"
+import * as fromEndpointsAction from "../redux/actions/endpoints-action"
 import { Store } from "@ngrx/store";
 import { environment } from "src/environments/environment";
 import { MsgPayload } from "../models/msgpayload";
-import * as fromAppReducer from "../redux/reducers/app-reducer"
-import * as fromEndpointsAction from "../redux/actions/endpoints-action"
 
 @Injectable()
-export class WSService {
+export class CommentWS {
+
+    constructor(private store:Store<fromAppReducer.AppState>){}
 
     socket:WebSocket
     ID:string
@@ -14,12 +16,12 @@ export class WSService {
     Email:string
     Bearer:string
     AvatarURL:string
+    PostID:string
 
-    constructor(private store:Store<fromAppReducer.AppState>){}
+    establishCommentWS(postID:string){
 
-    establishWS(){
-        this.socket = new WebSocket(`${environment.ws}${environment.initwsroute}`)
-        
+        this.socket = new WebSocket(`${environment.ws}${environment.initcommentroute}`)
+
         let localJSON = JSON.parse(localStorage.getItem("BEARER"))
         
         this.ID = localJSON["ID"]
@@ -27,19 +29,20 @@ export class WSService {
         this.Email = localJSON["Email"]
         this.Bearer = localJSON["Token"]
         this.AvatarURL = localJSON["AvatarURL"]
-        
+        this.PostID = postID
+
         this.socket.onopen = () => {
 
             let payloadToBeSent:MsgPayload = {
-                Type:"initFromClient",
+                Type:"initCommentFromClient",
                 ID:this.ID,
+                PostID:this.PostID,
                 Username:this.Username,
                 Email:this.Email,
                 ImageURL:null,
                 Text:null,
                 Bearer:this.Bearer,
                 AvatarURL:this.AvatarURL,
-                PostID:null,
             }
 
             this.socket.send(JSON.stringify(payloadToBeSent))
@@ -48,21 +51,24 @@ export class WSService {
         this.socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
             switch (data["Type"]){
-                case "initFromServer":
+                case "initCommentFromServer":
+                    console.log("iniCommentFromServer")
                     //implements render feed data (ngrx)
-                    this.store.dispatch(new fromEndpointsAction.AppendManyFeed(data["Data"]))
+                    this.store.dispatch(new fromEndpointsAction.AppendManyComment(data["Data"]))
                     break
-                case "postFromServer":
+                case "commentFromServer":
                     //implement append new feed data (ngrx)
-                    this.store.dispatch(new fromEndpointsAction.AppendOneFeed(data))
+                    this.store.dispatch(new fromEndpointsAction.AppendOneComment(data))
                     break
             }
         }
+
+        
     }
 
     sendMsgPayload(payload:{Type:string,ImageURL:string,Text:string}){
         let payloadToBeSent:MsgPayload = {
-            Type:"postFromClient",
+            Type:"commentFromClient",
             ID:this.ID,
             Username:this.Username,
             Email:this.Email,
@@ -70,8 +76,9 @@ export class WSService {
             ImageURL:payload.ImageURL,
             Bearer:this.Bearer,
             AvatarURL:this.AvatarURL,
-            PostID:null,
+            PostID:this.PostID,
         }
         this.socket.send(JSON.stringify(payloadToBeSent))
     }
+
 }

@@ -19,6 +19,7 @@ import { BearerInterceptor } from './bearer.interceptor';
 import { EndpointsEffect } from './redux/effects/endpoints-effect';
 import { LogoutInterceptor } from './logout.interceptor';
 import { WSService } from './ws-service/ws-service';
+import { CommentWS } from './comment/comment-ws';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { WSService } from './ws-service/ws-service';
   providers: [AuthGuard,LoginGuard,
     {provide:HTTP_INTERCEPTORS,useClass:BearerInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:LogoutInterceptor,multi:true},
-    WSService
+    WSService,
+    CommentWS
   ],
   bootstrap: [AppComponent]
 })

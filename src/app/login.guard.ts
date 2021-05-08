@@ -16,6 +16,7 @@ export class LoginGuard implements CanActivate {
       let token = localStorage.getItem("BEARER")
       console.log("login guard ", token)
       if(token){
+        this.router.navigateByUrl('/feed')
         resolve(false)
       }else{
         resolve(true)
