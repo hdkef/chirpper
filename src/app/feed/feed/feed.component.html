@@ -1,11 +1,15 @@
 <div id="container">
     <div id="post">
         <div id="post-wrapper">
+            <div *ngIf="preview" id="preview">
+                <img [src]="preview">
+            </div>
             <form [formGroup]="postForm" (ngSubmit)="sendChirp()">
                 <mat-form-field>
                     <textarea matInput placeholder="what's happening?.." formControlName="Text"></textarea>
                 </mat-form-field>
-                <div id="button-group">
+                <div id="btn-group">
+                    <input type="file" (change)="onFileChange($event)">
                     <button mat-raised-button color="primary" [disabled]="postForm.invalid">chirp</button>
                 </div>
             </form>

@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WSService } from 'src/app/ws-service/ws-service';
-import { MsgPayload } from 'src/app/models/msgpayload';
 import { Chirp } from 'src/app/models/chirp';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-feed',
@@ -15,7 +15,7 @@ import { Chirp } from 'src/app/models/chirp';
 })
 export class FeedComponent implements OnInit, OnDestroy {
 
-  constructor(private store:Store<fromAppReducer.AppState>, private ws:WSService) { }
+  constructor(private store:Store<fromAppReducer.AppState>, private ws:WSService, private sanitizer:DomSanitizer) { }
   
   ngOnDestroy(): void {
     if (this.endpointsSubs){
@@ -26,6 +26,8 @@ export class FeedComponent implements OnInit, OnDestroy {
   endpointsSubs:Subscription
   postForm:FormGroup
   feed:Chirp[]
+  fileHolder:File | null
+  preview:SafeUrl | null
 
   ngOnInit(): void {
 
@@ -39,22 +41,24 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   initiatePostForm(){
     this.postForm = new FormGroup({
-      'Text':new FormControl(null,Validators.required)
+      'Text':new FormControl(null,Validators.required),
     })
   }
 
-  sendChirp(){
-    let Text = this.postForm.value.Text
-    let payloadToBeSent = {
-      Type:"postFromClient",
-      ImageURL:null,
-      Text:Text,
+  onFileChange(event){
+    if (event.target.files && event.target.files.length) {
+      this.fileHolder = event.target.files[0];
+      this.preview = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.fileHolder))
     }
-    this.ws.sendMsgPayload(payloadToBeSent)
+  }
+
+  sendChirp(){
+    this.ws.postWithImage(this.postForm.value.Text, this.fileHolder)
     this.postForm.setValue({'Text':null})
     this.postForm.markAsPristine()
     this.postForm.markAsUntouched()
     this.postForm.controls.Text.setErrors(null)
+    this.preview = null
   }
 
 }

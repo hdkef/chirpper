@@ -2,6 +2,10 @@
     height:100%;
 }
 
+#preview img{
+    width:100%;
+}
+
 #post {
     display: flex;
     justify-content: center;
@@ -18,4 +22,9 @@ mat-form-field {
 
 #post-wrapper {
     width:85%;
+}
+
+#btn-group {
+    display: flex;
+    justify-content: space-between;
 }

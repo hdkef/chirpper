@@ -4,6 +4,7 @@ import { environment } from "src/environments/environment";
 import { MsgPayload } from "../models/msgpayload";
 import * as fromAppReducer from "../redux/reducers/app-reducer"
 import * as fromEndpointsAction from "../redux/actions/endpoints-action"
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class WSService {
@@ -15,7 +16,7 @@ export class WSService {
     Bearer:string
     AvatarURL:string
 
-    constructor(private store:Store<fromAppReducer.AppState>){}
+    constructor(private store:Store<fromAppReducer.AppState>, private http:HttpClient){}
 
     establishWS(){
         this.socket = new WebSocket(`${environment.ws}${environment.initwsroute}`)
@@ -60,18 +61,36 @@ export class WSService {
         }
     }
 
-    sendMsgPayload(payload:{Type:string,ImageURL:string,Text:string}){
+    sendMsgPayload(Text:string){
         let payloadToBeSent:MsgPayload = {
             Type:"postFromClient",
             ID:this.ID,
             Username:this.Username,
             Email:this.Email,
-            Text:payload.Text,
-            ImageURL:payload.ImageURL,
+            Text:Text,
+            ImageURL:null,
             Bearer:this.Bearer,
             AvatarURL:this.AvatarURL,
             PostID:null,
         }
         this.socket.send(JSON.stringify(payloadToBeSent))
     }
+
+    postWithImage(text:string, file:File | null){
+        if (file){
+            let formData: FormData = new FormData();
+            formData.append('Type',"postFromClient")
+            formData.append('ID',this.ID)
+            formData.append('Username',this.Username)
+            formData.append('Email',this.Email)
+            formData.append('AvatarURL',this.AvatarURL)
+            formData.append('Bearer',this.Bearer)
+            let filename = this.ID + file.name
+            formData.append('Image',file, filename)
+            this.http.post(`${environment.api}${environment.postwithimageroute}`,formData).subscribe()
+        }else {
+            this.sendMsgPayload(text)
+        }
+    }
+
 }
