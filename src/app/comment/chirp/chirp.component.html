@@ -4,6 +4,9 @@
       <mat-card-title style="cursor: pointer;" (click)="goToProfile()">{{chirp.Username}}</mat-card-title>
       <mat-card-subtitle>{{chirp.Date}}</mat-card-subtitle>
     </mat-card-header>
+    <div id="imgheader" *ngIf="chirp.ImageURL">
+      <img [src]="chirp.ImageURL">
+    </div>
     <mat-card-content>
       <p>
         {{chirp.Text}}

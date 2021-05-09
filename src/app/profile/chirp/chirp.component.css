@@ -6,6 +6,10 @@ mat-card {
 #imgheader {
     display: flex;
     justify-content: center;
+    margin-bottom: 25px;
+}
+
+#imgheader img{
     width: 100%;
     overflow-y: hidden;
 }

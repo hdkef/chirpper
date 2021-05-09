@@ -1,6 +1,7 @@
 <div id="commentHeader">
     <app-chirp [chirp]="commentHeader"></app-chirp>
 </div>
+<app-chirp *ngFor="let com of comment" [chirp]="com"></app-chirp>
 <div>
     <form [formGroup]="commentForm" (ngSubmit)="sendComment()">
         <div id="txt">
@@ -13,4 +14,3 @@
         </div>
     </form>
 </div>
-<app-chirp *ngFor="let com of comment" [chirp]="com"></app-chirp>

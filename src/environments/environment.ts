@@ -15,7 +15,7 @@ export const environment = {
   profileroute:"/endpoints/profile",
   searchroute:"/endpoints/search",
   initcommentroute:"/endpoints/comment",
-  postwithimageroute:"/endpoints/postwithimage"
+  postwithimageroute:"/endpoints/postwithimage",
 };
 
 /*
