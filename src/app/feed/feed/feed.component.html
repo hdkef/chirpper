@@ -9,7 +9,7 @@
                     <textarea matInput placeholder="what's happening?.." formControlName="Text"></textarea>
                 </mat-form-field>
                 <div id="btn-group">
-                    <input type="file" (change)="onFileChange($event)">
+                    <input type="file" (change)="onFileChange($event)" formControlName="Image">
                     <button mat-raised-button color="primary" [disabled]="postForm.invalid">chirp</button>
                 </div>
             </form>

@@ -42,6 +42,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   initiatePostForm(){
     this.postForm = new FormGroup({
       'Text':new FormControl(null,Validators.required),
+      'Image':new FormControl(null),
     })
   }
 
@@ -54,7 +55,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   sendChirp(){
     this.ws.postWithImage(this.postForm.value.Text, this.fileHolder)
-    this.postForm.setValue({'Text':null})
+    this.postForm.setValue({'Text':null, 'Image':null})
     this.postForm.markAsPristine()
     this.postForm.markAsUntouched()
     this.postForm.controls.Text.setErrors(null)

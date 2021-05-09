@@ -3,6 +3,13 @@ mat-card {
     margin-top:15px;
 }
 
+#imgheader {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow-y: hidden;
+}
+
 mat-card-content {
     padding-top:10px;
 }

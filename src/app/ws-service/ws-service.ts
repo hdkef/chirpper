@@ -85,6 +85,7 @@ export class WSService {
             formData.append('Email',this.Email)
             formData.append('AvatarURL',this.AvatarURL)
             formData.append('Bearer',this.Bearer)
+            formData.append('Text',text)
             let filename = this.ID + file.name
             formData.append('Image',file, filename)
             this.http.post(`${environment.api}${environment.postwithimageroute}`,formData).subscribe()
