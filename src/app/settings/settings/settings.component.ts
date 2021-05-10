@@ -81,6 +81,7 @@ export class SettingsComponent implements OnInit {
     }else if(!payload.Desc && payload.AvatarURL){
       tobeSaved.AvatarURL = payload.AvatarURL
     }
+    this.store.dispatch(new fromEndpointsAction.SettingSuccess(tobeSaved))
     // this.saveToLocal(JSON.stringify(tobeSaved))
   }
 
