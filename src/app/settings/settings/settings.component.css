@@ -1,0 +1,15 @@
+.settingdiv {
+    margin-bottom:15px;
+}
+
+#ava {
+    display: flex;
+    justify-content: center;
+    padding:10px;
+}
+
+#ava img {
+    overflow-y: hidden;
+    width:50%
+}
+

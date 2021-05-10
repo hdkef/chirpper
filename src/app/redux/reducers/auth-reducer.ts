@@ -7,6 +7,7 @@ export interface State {
     Token:string,
     Info:string,
     AvatarURL:string,
+    Desc:string,
 }
 
 const initialState:State = {
@@ -16,6 +17,7 @@ const initialState:State = {
     Token:"",
     Info:"",
     AvatarURL:"",
+    Desc:"",
 }
 
 export function authReducer (
@@ -34,6 +36,7 @@ export function authReducer (
                 Email:action.payload["Email"],
                 Token:action.payload["Token"],
                 AvatarURL:action.payload["AvatarURL"],
+                Desc:action.payload["Desc"],
             }
         case fromAuthAction.SEND_INFO:
             return {...state,

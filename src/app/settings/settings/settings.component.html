@@ -1,1 +1,24 @@
-<p>settings works!</p>
+<form [formGroup]="settingForm" (ngSubmit)="goSubmit()">
+    <div class="settingdiv">
+        <div *ngIf="AvatarURL" id="ava">
+            <img [src]="AvatarURL">
+        </div>
+        <mat-card>
+            <h3>Change Avatar</h3>
+            <input type="file" formControlName="Avatar" (change)="onFileChange($event)">
+        </mat-card>
+    </div>
+    <div class="settingdiv">
+        <mat-card>
+            <h3>Change Description</h3>
+            <mat-form-field>
+                <textarea matInput type="text" placeholder="change description" formControlName="Desc"></textarea>
+            </mat-form-field>
+        </mat-card>
+    </div>
+    <div>
+        <mat-card>
+            <button mat-stroked-button type="submit">submit</button>
+        </mat-card>
+    </div>
+</form>
