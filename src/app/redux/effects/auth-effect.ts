@@ -99,13 +99,13 @@ export class AuthEffect {
     settingSuccess$ = createEffect(()=>{
         return this.actions$.pipe(
             ofType(fromAuthAction.SETTING_SUCCESS),
-            switchMap((data)=>{
-                let ID = data["ID"]
-                let Username = data["Username"]
-                let Email = data["Email"]
-                let Token = data["Token"]
-                let AvatarURL = data["AvatarURL"]
-                let Desc = data["Desc"]
+            switchMap((action:fromAuthAction.SettingSuccess)=>{
+                let ID = action.payload["ID"]
+                let Username = action.payload["Username"]
+                let Email = action.payload["Email"]
+                let Token = action.payload["Token"]
+                let AvatarURL = action.payload["AvatarURL"]
+                let Desc = action.payload["Desc"]
                 this.saveToLocal({ID,Username,Email,Token,AvatarURL,Desc})
                 return of(new fromAuthAction.LoginSuccess({ID,Username,Email,Token,AvatarURL,Desc}))
             })
