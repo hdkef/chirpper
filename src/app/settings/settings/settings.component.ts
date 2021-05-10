@@ -54,7 +54,7 @@ export class SettingsComponent implements OnInit {
     if (formData.has('Desc') || formData.has('Avatar')){
       formData.append('ID', this.localJSON["ID"])
       this.http.post(`${environment.api}${environment.settingroute}`,formData).subscribe((data)=>{
-        this.afterSubmit({AvatarURL:["AvatarURL"],Desc:data["Desc"]})
+        this.afterSubmit({AvatarURL:data["AvatarURL"],Desc:data["Desc"]})
       },(err)=>{
         console.log(err)
         alert(err.message)
@@ -90,12 +90,6 @@ export class SettingsComponent implements OnInit {
         AvatarURL:tobeSaved.AvatarURL,
         Desc:tobeSaved.Desc
       }))
-    // this.saveToLocal(JSON.stringify(tobeSaved))
   }
-
-  // saveToLocal(payload){
-  //   localStorage.removeItem('BEARER')
-  //   localStorage.setItem('BEARER',payload)
-  // }
 
 }
