@@ -60,6 +60,7 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.postForm.markAsUntouched()
     this.postForm.controls.Text.setErrors(null)
     this.preview = null
+    this.fileHolder = null
   }
 
 }

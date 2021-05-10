@@ -94,6 +94,7 @@ export class SettingsComponent implements OnInit {
     this.settingForm.markAsPristine()
     this.settingForm.markAsUntouched()
     this.settingForm.controls.Desc.setErrors(null)
+    this.fileHolder = null
   }
 
 }
