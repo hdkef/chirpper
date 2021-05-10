@@ -99,7 +99,7 @@ export class AuthEffect {
     settingSuccess$ = createEffect(()=>{
         return this.actions$.pipe(
             ofType(fromAuthAction.SETTING_SUCCESS),
-            tap((data:fromAuthAction.SettingSuccess)=>{
+            switchMap((data)=>{
                 let ID = data["ID"]
                 let Username = data["Username"]
                 let Email = data["Email"]
@@ -107,9 +107,7 @@ export class AuthEffect {
                 let AvatarURL = data["AvatarURL"]
                 let Desc = data["Desc"]
                 this.saveToLocal({ID,Username,Email,Token,AvatarURL,Desc})
-            }),
-            switchMap(()=>{
-                return of(new fromAuthAction.SendInfo({Info:"Setting has changed"}))
+                return of(new fromAuthAction.LoginSuccess({ID,Username,Email,Token,AvatarURL,Desc}))
             })
         )
     })
