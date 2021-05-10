@@ -90,6 +90,10 @@ export class SettingsComponent implements OnInit {
         AvatarURL:tobeSaved.AvatarURL,
         Desc:tobeSaved.Desc
       }))
+    this.settingForm.setValue({'Desc':null, 'Avatar':null})
+    this.settingForm.markAsPristine()
+    this.settingForm.markAsUntouched()
+    this.settingForm.controls.Desc.setErrors(null)
   }
 
 }
