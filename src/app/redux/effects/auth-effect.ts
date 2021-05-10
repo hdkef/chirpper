@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as fromAuthAction from '../actions/auth-action'
-import { catchError, map, switchMap } from 'rxjs/operators'
+import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { of } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -92,6 +92,24 @@ export class AuthEffect {
             ofType(fromAuthAction.LOGIN_SUCCESS),
             switchMap((action:fromAuthAction.LoginSuccess)=>{
                 return of(new fromEndpointsAction.InitWS({}))
+            })
+        )
+    })
+
+    settingSuccess$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(fromAuthAction.SETTING_SUCCESS),
+            tap((data:fromAuthAction.SettingSuccess)=>{
+                let ID = data["ID"]
+                let Username = data["Username"]
+                let Email = data["Email"]
+                let Token = data["Token"]
+                let AvatarURL = data["AvatarURL"]
+                let Desc = data["Desc"]
+                this.saveToLocal({ID,Username,Email,Token,AvatarURL,Desc})
+            }),
+            switchMap(()=>{
+                return of(new fromAuthAction.SendInfo({Info:"Setting has changed"}))
             })
         )
     })

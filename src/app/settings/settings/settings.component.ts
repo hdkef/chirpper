@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
+import * as fromAppReducer from '../../redux/reducers/app-reducer';
+import * as fromEndpointsAction from '../../redux/actions/auth-action'
 
 @Component({
   selector: 'app-settings',
@@ -11,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private sanitizer:DomSanitizer, private http:HttpClient) { }
+  constructor(private sanitizer:DomSanitizer, private http:HttpClient, private store:Store<fromAppReducer.AppState>) { }
 
   settingForm:FormGroup
   fileHolder:File | null
@@ -49,8 +52,12 @@ export class SettingsComponent implements OnInit {
       formData.append('Avatar', this.fileHolder, this.localJSON["ID"])
     }
     if (formData.has('Desc') || formData.has('Avatar')){
+      formData.append('ID', this.localJSON["ID"])
       this.http.post(`${environment.api}${environment.settingroute}`,formData).subscribe((data)=>{
         this.afterSubmit({AvatarURL:["AvatarURL"],Desc:data["Desc"]})
+      },(err)=>{
+        console.log(err)
+        alert(err.message)
       })
     }else{
       alert("you haven't set anything")
@@ -74,12 +81,12 @@ export class SettingsComponent implements OnInit {
     }else if(!payload.Desc && payload.AvatarURL){
       tobeSaved.AvatarURL = payload.AvatarURL
     }
-    this.saveToLocal(JSON.stringify(tobeSaved))
+    // this.saveToLocal(JSON.stringify(tobeSaved))
   }
 
-  saveToLocal(payload){
-    localStorage.removeItem('BEARER')
-    localStorage.setItem('BEARER',payload)
-  }
+  // saveToLocal(payload){
+  //   localStorage.removeItem('BEARER')
+  //   localStorage.setItem('BEARER',payload)
+  // }
 
 }

@@ -38,6 +38,15 @@ export function authReducer (
                 AvatarURL:action.payload["AvatarURL"],
                 Desc:action.payload["Desc"],
             }
+        case fromAuthAction.SETTING_SUCCESS:
+            return {...state,
+                ID:action.payload["ID"],
+                Username:action.payload["Username"],
+                Email:action.payload["Email"],
+                Token:action.payload["Token"],
+                AvatarURL:action.payload["AvatarURL"],
+                Desc:action.payload["Desc"],
+            }
         case fromAuthAction.SEND_INFO:
             return {...state,
                 Info:action.payload["Info"],
@@ -47,6 +56,6 @@ export function authReducer (
         case fromAuthAction.LOGOUT_START:
             return {...initialState}
         default:
-            return {...initialState}
+            return state
     }
 }

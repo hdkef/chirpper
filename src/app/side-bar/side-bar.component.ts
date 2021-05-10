@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -10,9 +10,15 @@ import * as fromAuthAction from '../redux/actions/auth-action'
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent implements OnInit, OnDestroy {
 
   constructor(private router:Router, private store:Store<fromAppReducer.AppState>) { }
+  
+  ngOnDestroy(): void {
+    if (this.authSubs){
+      this.authSubs.unsubscribe()
+    }
+  }
 
   authSubs:Subscription
   ID:string
@@ -20,10 +26,22 @@ export class SideBarComponent implements OnInit {
   AvatarURL:string
 
   ngOnInit(): void {
-    let parsedJSON = JSON.parse(localStorage.getItem("BEARER"))
-    this.ID = parsedJSON["ID"]
-    this.Username = parsedJSON["Username"]
-    this.AvatarURL = parsedJSON["AvatarURL"]
+    // let parsedJSON = JSON.parse(localStorage.getItem("BEARER"))
+    // this.ID = parsedJSON["ID"]
+    // this.Username = parsedJSON["Username"]
+    // this.AvatarURL = parsedJSON["AvatarURL"]
+    this.authSubs = this.store.select("auth").subscribe((auth)=>{
+      console.log(auth)
+      if (auth["AvatarURL"]){
+        this.AvatarURL = auth["AvatarURL"]
+      }
+      if (auth["ID"]){
+        this.ID = auth["ID"]
+      }
+      if (auth["Username"]){
+        this.Username = auth["Username"]
+      }
+    })
   }
   
   goProfile(){
