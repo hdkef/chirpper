@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-settings',
@@ -9,12 +11,13 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private sanitizer:DomSanitizer) { }
+  constructor(private sanitizer:DomSanitizer, private http:HttpClient) { }
 
   settingForm:FormGroup
   fileHolder:File | null
   AvatarURL:SafeUrl | null | string
   localJSON:string
+  valid:boolean
 
   ngOnInit(): void {
 
@@ -33,6 +36,7 @@ export class SettingsComponent implements OnInit {
     if (event.target.files && event.target.files.length) {
       this.fileHolder = event.target.files[0];
       this.AvatarURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.fileHolder))
+      this.valid = true
     }
   }
 
@@ -44,12 +48,38 @@ export class SettingsComponent implements OnInit {
     if (this.fileHolder && this.AvatarURL != this.localJSON["AvatarURL"] && this.AvatarURL != null){
       formData.append('Avatar', this.fileHolder, this.localJSON["ID"])
     }
-    console.log(formData.get('Desc'))
-    console.log(formData.get('Avatar'))
+    if (formData.has('Desc') || formData.has('Avatar')){
+      this.http.post(`${environment.api}${environment.settingroute}`,formData).subscribe((data)=>{
+        this.afterSubmit({AvatarURL:["AvatarURL"],Desc:data["Desc"]})
+      })
+    }else{
+      alert("you haven't set anything")
+    }
   }
 
-  afterSubmit(payload:{AvatarURL:string,Desc:string}){
+  afterSubmit(payload:{AvatarURL:SafeUrl | string,Desc:string}){
+    let tobeSaved = {
+      Username:this.localJSON["Username"],
+      Email:this.localJSON["Email"],
+      ID:this.localJSON["ID"],
+      Token:this.localJSON["Token"],
+      AvatarURL:this.localJSON["AvatarURL"],
+      Desc:this.localJSON["Desc"],
+    }
+    if (payload.Desc && payload.AvatarURL){
+      tobeSaved.AvatarURL = payload.AvatarURL
+      tobeSaved.Desc = payload.Desc
+    }else if(payload.Desc && !payload.AvatarURL){
+      tobeSaved.Desc = payload.Desc
+    }else if(!payload.Desc && payload.AvatarURL){
+      tobeSaved.AvatarURL = payload.AvatarURL
+    }
+    this.saveToLocal(JSON.stringify(tobeSaved))
+  }
 
+  saveToLocal(payload){
+    localStorage.removeItem('BEARER')
+    localStorage.setItem('BEARER',payload)
   }
 
 }

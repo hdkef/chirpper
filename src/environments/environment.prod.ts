@@ -12,4 +12,5 @@ export const environment = {
   searchroute:"/endpoints/search",
   initcommentroute:"/endpoints/comment",
   postwithimageroute:"/endpoints/postwithimage",
+  settingroute:"/endpoints/setting",
 };
