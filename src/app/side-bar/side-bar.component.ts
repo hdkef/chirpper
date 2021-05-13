@@ -31,7 +31,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     // this.Username = parsedJSON["Username"]
     // this.AvatarURL = parsedJSON["AvatarURL"]
     this.authSubs = this.store.select("auth").subscribe((auth)=>{
-      console.log(auth)
+      // console.log(auth)
       if (auth["AvatarURL"]){
         this.AvatarURL = auth["AvatarURL"]
       }

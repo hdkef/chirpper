@@ -52,7 +52,7 @@ export class CommentWS {
             let data = JSON.parse(event.data)
             switch (data["Type"]){
                 case "initCommentFromServer":
-                    console.log("iniCommentFromServer")
+                    // console.log("iniCommentFromServer")
                     //implements render feed data (ngrx)
                     this.store.dispatch(new fromEndpointsAction.AppendManyComment(data["Data"]))
                     break

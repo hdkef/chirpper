@@ -49,14 +49,14 @@ export class SettingsComponent implements OnInit {
       formData.append('Desc', this.settingForm.value.Desc)
     }
     if (this.fileHolder && this.AvatarURL != this.localJSON["AvatarURL"] && this.AvatarURL != null){
-      formData.append('Avatar', this.fileHolder, this.localJSON["ID"])
+      formData.append('Avatar', this.fileHolder, this.localJSON["ID"] + `.${this.fileHolder.name.split(".").pop()}`)
     }
     if (formData.has('Desc') || formData.has('Avatar')){
       formData.append('ID', this.localJSON["ID"])
       this.http.post(`${environment.api}${environment.settingroute}`,formData).subscribe((data)=>{
         this.afterSubmit({AvatarURL:data["AvatarURL"],Desc:data["Desc"]})
       },(err)=>{
-        console.log(err)
+        // console.log(err)
         alert(err.message)
       })
     }else{

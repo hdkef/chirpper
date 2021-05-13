@@ -45,6 +45,7 @@ export class AuthEffect {
                 return this.http.post(`${environment.api}${environment.registerroute}`,payloadJSON).pipe(
                     map((data)=>{
                         let msg = data["MESSAGE"]
+                        this.router.navigateByUrl('/login')
                         return new fromAuthAction.SendInfo({Info:msg})
                     }),
                     catchError((err)=>{
