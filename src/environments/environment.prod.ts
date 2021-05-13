@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  api:"http://localhost:4040",
-  ws:"ws://localhost:4040",
+  api:"https://thechirpper.herokuapp.com",
+  ws:"wss://thechirpper.herokuapp.com",
   loginroute:"/auth/login",
   registerroute:"/auth/register",
   sendemailverroute:"/auth/sendemailver",
