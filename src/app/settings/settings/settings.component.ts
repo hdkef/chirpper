@@ -56,7 +56,6 @@ export class SettingsComponent implements OnInit {
       this.http.post(`${environment.api}${environment.settingroute}`,formData).subscribe((data)=>{
         this.afterSubmit({AvatarURL:data["AvatarURL"],Desc:data["Desc"]})
       },(err)=>{
-        // console.log(err)
         alert(err.message)
       })
     }else{

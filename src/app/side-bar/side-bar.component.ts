@@ -26,12 +26,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   AvatarURL:string
 
   ngOnInit(): void {
-    // let parsedJSON = JSON.parse(localStorage.getItem("BEARER"))
-    // this.ID = parsedJSON["ID"]
-    // this.Username = parsedJSON["Username"]
-    // this.AvatarURL = parsedJSON["AvatarURL"]
     this.authSubs = this.store.select("auth").subscribe((auth)=>{
-      // console.log(auth)
       if (auth["AvatarURL"]){
         this.AvatarURL = auth["AvatarURL"]
       }

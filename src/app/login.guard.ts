@@ -14,7 +14,6 @@ export class LoginGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve,_)=>{
       let token = localStorage.getItem("BEARER")
-      // console.log("login guard ", token)
       if(token){
         this.router.navigateByUrl('/feed')
         resolve(false)
