@@ -17,3 +17,7 @@ Feed    : this component is the main feed of user, it contains feed and an input
 
 # WS-Service & Comment-WS
 WS-Service is being called whenever the autologin is succeed or after user logging in. This is basically do websocket handshake with the server so that realtime communication can be established. Comment-WS is basically do the same, but it's specially designed to maintain realtime communication for a specific feed item (be called whenever the user see comments section of a feed item)
+
+# TODO
+Follow method haven't been implemented because Firebase currently doesn't support array manipulation.
+Until then, this feature will not be created.
